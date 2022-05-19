@@ -1,0 +1,112 @@
+from ._anvil_designer import Form1Template
+from anvil import *
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+import anvil.server
+import anvil.users 
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+ 
+class Form1(Form1Template):
+  dict1 = dict()
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+    
+    anvil.users.login_with_form()
+  
+  def text_box_1_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    user_input = self.text_box_1.text
+    output =  anvil.server.call('responsed', user_input)
+    self.text_box_2.visible = True
+    self.label_3.visible = True
+    self.text_box_2.text = output
+    self.text_box_4.visible = True
+    self.label_9.visible = True
+#     text_box = Text
+#     self.add_component(text_box)
+#     to print output on text_box_2
+    pass
+
+  def text_box_4_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    user_input = self.text_box_4.text
+    output =  anvil.server.call('responsed', user_input)
+    self.text_box_5.visible = True
+    self.label_13.visible = True
+    self.text_box_5.text = output
+    self.text_box_6.visible = True
+    self.label_10.visible = True
+    pass
+  
+  def text_box_6_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    user_input = self.text_box_6.text
+    output =  anvil.server.call('responsed', user_input)
+    self.text_box_7.visible = True
+    self.label_14.visible = True
+    self.text_box_7.text = output
+    self.text_box_8.visible = True
+    self.label_11.visible = True
+    pass
+  
+  def text_box_8_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    user_input = self.text_box_8.text
+    output =  anvil.server.call('responsed', user_input)
+    self.text_box_9.visible = True
+    self.label_15.visible = True
+    self.text_box_9.text = output
+    self.text_box_11.visible = True
+    self.label_12.visible = True
+    pass
+  
+  def text_box_11_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    user_input = self.text_box_11.text
+    output =  anvil.server.call('responsed', user_input)
+    self.text_box_10.visible = True
+    self.label_16.visible = True
+    self.text_box_10.text = output
+    pass
+
+  def button_2_click(self, **event_args):
+    """This method is called when the button is clicked"""
+#     song_emotion --> function name
+    if self.text_box_1.text and self.text_box_4.text and self.text_box_6.text and self.text_box_8.text and self.text_box_11.text:
+      dict1 = anvil.server.call('song_emotion')
+#     print(dict1)
+      self.label_5.text = dict1['emotion']
+      dict1.pop('emotion')
+      lst = list(dict1.keys())
+#     for key in dict1:
+#       lst.append(key)
+      self.link_1.url = dict1[lst[0]];
+      self.link_1.text = lst[0]
+      self.link_5.url = dict1[lst[1]];
+      self.link_5.text = lst[1]
+      self.link_4.url = dict1[lst[2]];
+      self.link_4.text = lst[2]
+      self.link_3.url = dict1[lst[3]];
+      self.link_3.text = lst[3]
+      self.link_2.url = dict1[lst[4]];
+      self.link_2.text = lst[4]
+      self.link_6.url = dict1[lst[5]];
+      self.link_6.text = lst[5]
+      self.link_10.url = dict1[lst[6]];
+      self.link_10.text = lst[6]
+      self.link_9.url = dict1[lst[7]];
+      self.link_9.text = lst[7]
+      self.link_8.url = dict1[lst[8]];
+      self.link_8.text = lst[8]
+      self.link_7.url = dict1[lst[9]];
+      self.link_7.text = lst[9]
+      pass
+    else:
+      Notification('Please Chat first with our Bot',timeout=2).show()
+ 
